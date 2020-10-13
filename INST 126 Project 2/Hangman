@@ -1,0 +1,84 @@
+#This python program is a hangman game
+#Import both random and choice functions. Python will randomly select one word in the list.
+from random import choice
+
+#Decryption function. Uses the users' correctly guessed word as a parameter.
+def decrypt(ciphertext, plaintext):
+        if (ciphertext == "WHDSPQZ"):
+            print("The decrypted word is: "+ plaintext[0])
+        elif (ciphertext == "XHO"):
+            print("The decrypted word is: "+ plaintext[1])
+        elif (ciphertext == "TTDBFRT"):
+            print("The decrypted word is: "+ plaintext[2])
+        elif(ciphertext == "QQJYF"):
+            print("The decrypted word is: "+ plaintext[3])
+        elif(ciphertext == "ENQD"):
+            print("The decrypted word is: "+ plaintext[4])
+        elif(ciphertext == "DNPK"):
+            print("The decrypted word is: "+ plaintext[5])
+        elif(ciphertext == "CNTR"):
+            print("The decrypted word is: "+ plaintext[6])
+        elif(ciphertext == "EHWHOD"):
+            print("The decrypted word is: "+ plaintext[7])
+        elif(ciphertext == "TSVMOHOF"):
+            print("The decrypted word is: "+ plaintext[8])
+        elif(ciphertext == "XNOCFQGTM"):
+            print("The decrypted word is: "+ plaintext[9])
+        else:
+            print("You have no words to decode.")
+
+words = choice(["WHDSPQZ", "XHO", "TTDBFRT", "QQJYF", "ENQD", "DNPK", "CNTR", "EHWHOD", "TSVMOHOF", "XNOCFQGTM"])
+
+#The user will have 10 attempts to guess the correct word.
+attempts = 10
+#This is a list that will contain the amount of correct guesses the user makes for each letter.
+correct_Guesses = []
+#This field will store all the guesses that were incorrect.
+incorrect = []
+
+
+#Loop the game until the user guesses the word.
+while attempts > 0:
+    #Create a space for the letters and update it when the user correctly identifies a letter in the list of words.
+    output = ""
+    for letter in words:
+        if letter in correct_Guesses:
+            output = output + letter
+        else:
+            output = output + "_"
+
+    if output == words:
+        break
+
+    #Print out the space for the words and how many attempts the user currently has.
+    print("Guess the word:", output)
+    print(attempts, "chances left")
+
+    #The users input will be stored in the guess variable.
+    guess = input()
+
+    #Determine whether the user has already guessed a letter correctly, incorrectly, or if the letter has already been used.
+    #Additionally, add & store each letter to their respective list of correct_Guesses or incorrect guesses.
+    if guess in correct_Guesses or guess in incorrect:
+        print("Already guessed", guess)
+    elif guess in words:
+        print("Nice job fam!")
+        correct_Guesses.append(guess)
+    else:
+        print("Naw, that's not it fam. Keep trying.")
+        #Deduct the users' attempts by increments of 1.
+        attempts = attempts - 1
+        incorrect.append(guess)
+
+
+#Congratulate the user if they guessed the correct word, or inform the user what the correct word was.
+#Implement the decrypt function to decipher the users' word into plaintext if they guesses correctly.
+if attempts:
+    print("Great job fam, you guessed the correct word", words)
+    ciphertext = input("Please enter the word you correctly guessed")
+    plaintext = ["Banana", "Taco", "Balloon", "Prize","Joy","Nice","Blush","Cool","Dance","Bang"]
+    decrypt(ciphertext, plaintext)
+else:
+    print("Sorry fam, the correct word was", words)
+
+
