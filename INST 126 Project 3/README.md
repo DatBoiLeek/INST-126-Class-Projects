@@ -4,7 +4,7 @@
 ## General
 > This project is based on Python reading & parsing a userlog file. 
 
-##Setuo
+## Setup
 >This project should be ran on applications that support Python 3. 
 
 
