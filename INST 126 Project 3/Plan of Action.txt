@@ -1,0 +1,15 @@
+Malik Callaham 
+INST 126 Plan of Action- Project 3
+
+For Project 3, one approach that I plan to take is to import both regular expressions and pandas to help 
+grab the data I need and to structure the data in a table like manner. I also plan to use a function that includes the readlines method 
+to return a list that contains objects on each line in the file as a list item. 
+The next thing I would do is define regular expressions to match the strings that I'm looking for within the text file. This includes 
+(but not limited to) the selected users, the date, & the server of where the incident occured. 
+I also plan to create another empty list that will contain data from the text file (which will append to the empty list)
+as well as iterables to help check for regular expression matches in the text file (at least one while loop). 
+Conditional statements will also be used to find incident dates, names, & times. 
+The last thing I will do is create a function that stores all log entries from the text file and create a count variable for each incident and activity
+that occurred (and print the output).  
+Since this project is fairly large in nature, for the first week I hope to get down the structure of how I want the output to be presented, as well as
+break apart each individual issue step by step (suspicious activity, system glitches, etc.). 
