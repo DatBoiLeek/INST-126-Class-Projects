@@ -13,6 +13,10 @@
 > Lastly, while there are a great many ways of doing this assignment (which is arguably the hardest part of this project), I am going to work on it the best way I know how. 
 >Additionally, I expect there to be quite a few text files that python will be writing that contains information specific for each deliverable. 
 
+## Any other challenges encountered so far? 
+> Yes, as of 10/30/2020, I have encountered several challenges so far, the biggest being both the irresponsible log and glitch log. I have focused my efforts on the irresponsible 
+> log right now though. I did manage to print out each and every person who did not logout from the userlog file (there are about 2k entries, roughly half of the userlog text file). The challenge is setting the output of each entry to be the same, as only one user has the correct notation. If all else fails I will gladly move on to work on the glitch report, which has proven to be its' own challenge.  
+
 
 
 
