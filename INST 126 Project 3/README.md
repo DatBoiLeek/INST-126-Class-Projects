@@ -20,7 +20,8 @@
 ## 11/1/2020 Update
 > As of 11/1/20, I was able to solve quite a bit of the project, especially for the glitch log. The output of the glitch log contains every single user that logged out more than they logged in. The problem, however, is exactly the same as with the irresponsible log. Additionally, I created a domain log function that returns the count of every single email domain that is referenced in the user log. I can safely say that the project is near completition, and I hope to be able to solve the irresponsible log and glitch log. As it stands, the only perfect log output is the suspicious text file I have python writing to. All of the other log files that I have written to indeed solves the problem, but not with a desirable output.  
 
-
+## 11/3/2020 Update
+> As of 11/3/20, I realized that there was another issue with the glitch log I created. Column 2, which is the user log activity (login/logout) is printing "login", which is the incorrect activity for the glitch log. I implement the "logout" string in a new variable called user_Glitch as a placeholder until I hopefully can figure out why "logout" is not printing from the column 2 list. 
 
 
 
