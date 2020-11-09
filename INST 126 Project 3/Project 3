@@ -1,1 +1,88 @@
+#This is setup to help me practice my code for Project 3.
+#Import both datetime and regular expressions modules
+import datetime
+import collections
+import re
+
+#Declare and initialize variables
+#create a variable to store the times for both 5 am and 12 am
+FiveAM = datetime.datetime.strptime('05:00:00', '%H:%M:%S')
+TwelveAM = datetime.datetime.strptime('00:00:00', '%H:%M:%S')
+
+#Set function for users who logged in but never logged out.
+loggedin = set()
+
+#Set function for all of the employees
+allEmployees = set()
+
+#Set counter and create empty list to append suspicious activity to the list.
+counter = 0
+
+#Open the userlog text file and read it
+this_file = open("userlog.txt")
+
+#Open files that will have info written on them
+suspicious_file = open("suspicious.txt", "w")
+domain_file = open("domains.txt", "w")
+irresponsible_file = open("irresponsible.txt", "w")
+glitched_file = open("system glitch.txt", "w")
+
+#Read the lines in the userlog.
+lines = this_file.readlines()
+
+for ln in lines:
+        #Split the list at spaces. Columns are the specific indexes in the text file. Column 0 = the date, Column 1 = the time
+        #Column 2 = login/logout, Column 3 = the server, and column 4 = the email domain.
+        columns = ln.split()
+        #Create variables for the date as dt.
+        dt = datetime.datetime.strptime(' '.join(columns[:2]), '%Y-%m-%d %H:%M:%S')
+        #Create variable for the time, store it as tm.
+        tm = datetime.datetime.strptime(columns[1], '%H:%M:%S')  # Time only
+        #Print the columns, but also add all of the employees to a separate set.
+        print(columns)
+        allEmployees.add(columns[4])
+
+         #If the user logins(column 2) between 12:00 am and 5:00 am, flag them as suspicious, and add to counter.
+         #Ask how I could append this data and write it out to a file, or how I could separate this data from the rest of the file (write out).
+        if columns[2] == 'login' and tm >= TwelveAM and tm <= FiveAM:
+            counter += 1
+            #Create a variable to store the contents of the result.
+            user_Act =  columns[4] + " " + str(counter) +\
+                "\n" + "\tDATE: " + columns[0] + " ---" + \
+                 "\n" + "\t\tTIME: " + columns[1] + "\t" + "ACTIVITY: " + columns[2] + "\t" + "SERVER: " + columns[3]+ "\n"
+            #Variable for glitch file.
+            user_Glitch = columns[4] + " " + str(counter) + \
+                          "\n" + "\tDATE: " + columns[0] + " ---" + \
+                          "\n" + "\t\tTIME: " + columns[1] + "\t" + "ACTIVITY: " + "logout" + "\t" + "SERVER: " + \
+                          columns[3] + "\n"
+            #Write out the contents of suspicious activity and close the file. Do the same for users still logged in for the irresponsible part.
+            suspicious_file.write(user_Act)
+            suspicious_file.close
+
+#Check to see which users never logged out using activity and user email. Place counter by their name.
+        if columns[2] == "login":
+            loggedin.add(columns[4] + " " + str(counter))
+        # If the user did logout, remove them from the loggedin set.
+        else:
+            if columns[4] in loggedin: loggedin.remove(columns[4])
+#Print the respective list to irresponsible and glitched log files.
+# For the glitched file, subtract the employees that logged in and out from the system. Employees left are glitches in the system.
+print(user_Act, '\n'.join(loggedin), sep='', file = irresponsible_file)
+print(user_Glitch, '\n'.join(allEmployees-loggedin), sep ='', file = glitched_file)
+
+#Define function for the email domains
+def domainLog():
+    with open("userlog.txt") as f:
+        rereadFam = f.read()
+        #re.MULTILINE matches pattern characters for the emails.
+        domains = re.findall(r'@(.*)$', rereadFam, re.MULTILINE)
+        demEmails = collections.Counter(domains)
+    #Write the contents of the selected emails to the domain file.
+    print(demEmails, file = domain_file)
+    domain_file.close()
+
+#Call the domain log function
+domainLog()
+
+
 
